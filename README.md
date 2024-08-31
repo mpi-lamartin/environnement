@@ -1,7 +1,7 @@
 # Environnement de développement pour les TP de MPI
 
 Contient :
-- `utop` comme interpréteur interactif OCaml
+- `ocaml` comme interpréteur interactif OCaml
 - `gcc` comme compilateur C (exemple : gcc test.c puis ./a.out)
 - `ocaml` pour exécuter un fichier OCaml (exemple : ocaml test.ml)
 - `ocamlopt` pour compiler un fichier OCaml
