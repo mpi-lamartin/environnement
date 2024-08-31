@@ -1,7 +1,8 @@
 {
   "name": "MPI",
   "remoteUser": "opam",
-  "image": "ocaml/opam:debian",
+  // "image": "ocaml/opam:debian",
+  "dockerFile": "Dockerfile",
   "extensions": [
     "ocamllabs.ocaml-platform",
     "ms-vscode.cpptools-extension-pack",

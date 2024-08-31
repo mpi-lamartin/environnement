@@ -1,10 +1,9 @@
 # Environnement de développement pour les TP de MPI
 
 Contient :
-- `utop` comme interpréteur interactif OCaml
 - `gcc` comme compilateur C (exemple : gcc test.c puis ./a.out)
 - `ocaml` pour exécuter un fichier OCaml (exemple : ocaml test.ml)
-- `ocamlopt` pour compiler un fichier OCaml
+- `ocamlopt` pour compiler un fichier OCaml (exemple : ocamlopt test.ml puis ./a.out)
 
 Le Makefile est celui donné au TP d'informatique à CCINP et permet de simplifier les commandes.  
 Par exemple, `make main` est un raccourci pour `gcc -o main.exe -Wall *.c -lm` : il compile tous les fichiers C et produit un exécutable `main.exe`.
