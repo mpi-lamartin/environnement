@@ -5,9 +5,9 @@
   "dockerFile": "Dockerfile",
   "extensions": [
     "ocamllabs.ocaml-platform",
-    "ms-vscode.cpptools-extension-pack",
+    "ms-vscode.cpptools-extension-pack"
   ],
   "settings": {
     "workbench.colorTheme": "Default High Contrast"
-  },
+  }
 }
