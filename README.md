@@ -45,7 +45,6 @@ Le workflow [Build and publish Codespaces image](https://github.com/mpi-lamartin
 construit une image `linux/amd64`, adaptée à Codespaces :
 
 - à chaque modification de `.devcontainer/` ou du workflow sur `main` ;
-- chaque lundi pour intégrer les mises à jour Debian ;
 - manuellement avec **Run workflow**.
 
 Les pull requests construisent et testent l'image sans la publier. Le cache
@@ -58,17 +57,17 @@ aucun secret personnel n'est nécessaire.
 
 ### Accès à GHCR
 
-Le package est privé car la politique de l'organisation interdit actuellement
-les packages publics. Dans ses paramètres, **Manage Codespaces access** accorde
-au dépôt `mpi-lamartin/environnement` le rôle **Read**. Les Codespaces créés depuis
-ce dépôt peuvent ainsi récupérer l'image sans secret de registre personnel.
-Cet accès doit être ajouté explicitement pour tout autre dépôt utilisant l'image
-(y compris les forks). Un téléchargement Docker hors Codespaces nécessite une
-authentification GHCR disposant du droit de lecture du package.
+L'[image Docker est publique sur GHCR](https://github.com/orgs/mpi-lamartin/packages/container/package/environnement).
+Elle peut être téléchargée sans authentification, depuis Codespaces, un fork
+ou Docker en local :
 
-Si la politique de l'organisation autorise plus tard les packages publics,
-rendre ce package public permettra les téléchargements anonymes. Un dépôt public
-ne rend pas automatiquement son package public.
+```sh
+docker pull ghcr.io/mpi-lamartin/environnement:latest
+```
+
+Les packages publics sont autorisés dans les paramètres de l'organisation.
+Aucune reconstruction périodique n'est programmée ; les constructions sont
+lancées lors des modifications indiquées ci-dessus ou manuellement.
 
 Après une mise à jour, reconstruire le Codespace pour récupérer la nouvelle
 image. Pour revenir à une version précise, remplacer `latest` dans

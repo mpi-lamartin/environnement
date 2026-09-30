@@ -11,8 +11,6 @@ on:
       - '.devcontainer/**'
       - '.github/workflows/container.yml'
   workflow_dispatch:
-  schedule:
-    - cron: '23 4 * * 1'
 
 permissions:
   contents: read
@@ -36,7 +34,6 @@ jobs:
           context: .devcontainer
           load: true
           pull: true
-          no-cache: ${{ github.event_name == 'schedule' }}
           platforms: linux/amd64
           tags: mpi-environnement:test
           cache-from: type=gha
