@@ -12,7 +12,8 @@
         "workbench.colorTheme": "Default High Contrast",
         "ocaml.sandbox": {
           "kind": "global"
-        }
+        },
+        "chat.disableAIFeatures": true
       }
     }
   }

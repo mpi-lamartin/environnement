@@ -23,6 +23,8 @@ installation APT ni compilation OPAM n'est lancée à la création du Codespace.
 Les extensions OCaml Platform et C/C++ Extension Pack ainsi que le thème
 High Contrast sont conservés. Les trois messages d'aide s'affichent à
 l'ouverture d'un terminal Bash.
+Copilot (chat et suggestions) est désactivé par le réglage VS Code
+`chat.disableAIFeatures: true`, défini dans le dépôt et le devcontainer.
 
 L'image utilise Debian 13 (`trixie-slim`) et un utilisateur `vscode` avec sudo.
 Elle contient `gcc` (avec les sanitizers), `gdb`, `make`, `sqlite3`, OCaml 5.3
