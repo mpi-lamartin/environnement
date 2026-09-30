@@ -1,0 +1,64 @@
+name: Build and publish Codespaces image
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.devcontainer/**'
+      - '.github/workflows/container.yml'
+  pull_request:
+    paths:
+      - '.devcontainer/**'
+      - '.github/workflows/container.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '23 4 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: codespaces-image-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Build image for testing
+        uses: docker/build-push-action@v6
+        with:
+          context: .devcontainer
+          load: true
+          pull: true
+          no-cache: ${{ github.event_name == 'schedule' }}
+          platforms: linux/amd64
+          tags: mpi-environnement:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Test teaching tools without OPAM
+        run: |
+          docker run --rm -i mpi-environnement:test sh -s < .devcontainer/smoke-test.sh
+          docker image inspect mpi-environnement:test --format 'Image size: {{.Size}} bytes'
+      - name: Log in to GHCR
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish tested image
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          IMAGE: ghcr.io/${{ github.repository }}
+        run: |
+          IMAGE="${IMAGE,,}"
+          docker tag mpi-environnement:test "$IMAGE:latest"
+          docker tag mpi-environnement:test "$IMAGE:sha-$GITHUB_SHA"
+          docker push "$IMAGE:sha-$GITHUB_SHA"
+          docker push "$IMAGE:latest"
