@@ -20,67 +20,13 @@ Par exemple, `make main` est un raccourci pour `gcc -o main.exe -Wall *.c -lm` :
 
 Codespaces télécharge `ghcr.io/mpi-lamartin/environnement:latest` : aucune
 installation APT ni compilation OPAM n'est lancée à la création du Codespace.
-Les extensions OCaml Platform et C/C++ Extension Pack ainsi que le thème
-High Contrast sont conservés. Les trois messages d'aide s'affichent à
-l'ouverture d'un terminal Bash.
-Copilot (chat et suggestions) est désactivé par le réglage VS Code
-`chat.disableAIFeatures: true`, défini dans le dépôt et le devcontainer.
 
 L'image utilise Debian 13 (`trixie-slim`) et un utilisateur `vscode` avec sudo.
 Elle contient `gcc` (avec les sanitizers), `gdb`, `make`, `sqlite3`, OCaml 5.3
 (`ocaml`, `ocamlc`, `ocamlopt`), utop 2.16.0, ocamlformat 0.27.0
 (avec `ocamlformat-rpc`) et ocaml-lsp-server 1.23.1 (`ocamllsp`).
-Git et le client SSH restent disponibles pour les TP.
-
-OPAM sert uniquement à construire les outils dans une étape Docker séparée.
-L'image finale contient le compilateur Debian et les outils installés, sans
-OPAM, dépôt de paquets ni sources de compilation. Les paquets APT sont installés
-avec `--no-install-recommends` et leurs listes sont supprimées dans la même
-couche. Les symboles de débogage des outils OCaml natifs sont supprimés ;
-les programmes C des élèves restent débogables avec GDB. OCaml Platform utilise le sandbox `global` pour trouver ces outils.
-Pour ajouter durablement une bibliothèque, modifier l'étape de construction
-et republier l'image.
-
-### Construction et publication
-
-Le workflow [Build and publish Codespaces image](https://github.com/mpi-lamartin/environnement/actions/workflows/container.yml)
-construit une image `linux/amd64`, adaptée à Codespaces :
-
-- à chaque modification de `.devcontainer/` ou du workflow sur `main` ;
-- manuellement avec **Run workflow**.
-
-Les pull requests construisent et testent l'image sans la publier. Le cache
-GitHub Actions évite de recompiler les couches inchangées. Les tests exécutent
-les outils de TP, compilent du C avec les sanitizers et du code OCaml en bytecode
-et en natif, puis vérifient utop, le formatage, LSP et l'aide du terminal.
-Seule l'image testée est publiée, avec les tags `latest` et `sha-<commit>`.
-Le workflow utilise `GITHUB_TOKEN` avec `contents: read` et `packages: write` ;
-aucun secret personnel n'est nécessaire.
-
-### Accès à GHCR
-
-L'[image Docker est publique sur GHCR](https://github.com/orgs/mpi-lamartin/packages/container/package/environnement).
-Elle peut être téléchargée sans authentification, depuis Codespaces, un fork
-ou Docker en local :
-
-```sh
-docker pull ghcr.io/mpi-lamartin/environnement:latest
-```
-
-Les packages publics sont autorisés dans les paramètres de l'organisation.
-Aucune reconstruction périodique n'est programmée ; les constructions sont
-lancées lors des modifications indiquées ci-dessus ou manuellement.
-
-Après une mise à jour, reconstruire le Codespace pour récupérer la nouvelle
-image. Pour revenir à une version précise, remplacer `latest` dans
-`.devcontainer/devcontainer.json` par le tag `sha-<commit>` voulu.
-
-Pour construire et tester localement depuis la racine du dépôt :
 
 ```sh
 docker build -t mpi-environnement:test .devcontainer
 docker run --rm -i mpi-environnement:test sh -s < .devcontainer/smoke-test.sh
 ```
-
-Le Makefile à la racine reste celui des TP ; l'ancien Makefile de publication
-Docker Hub dans `.devcontainer/` est remplacé par GitHub Actions.
