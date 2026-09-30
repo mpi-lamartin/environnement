@@ -18,6 +18,14 @@ RUN strip --strip-debug /opt/ocaml/_opam/bin/ocamllsp \
         /opt/ocaml/_opam/bin/ocamlformat /opt/ocaml/_opam/bin/ocamlformat-rpc \
         /opt/ocaml/_opam/bin/dune /opt/ocaml/_opam/bin/ocaml-index
 
+# Generate only the locale requested by Codespaces terminals. Keep the locale
+# sources and generation tools out of the runtime image.
+FROM debian:trixie-slim AS locale-data
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends locales \
+    && localedef -i en_US -f UTF-8 en_US.UTF-8 \
+    && rm -rf /var/lib/apt/lists/*
+
 FROM debian:trixie-slim
 LABEL org.opencontainers.image.source="https://github.com/mpi-lamartin/environnement"
 
@@ -32,6 +40,8 @@ RUN apt-get update \
     && useradd --create-home --uid 1000 --shell /bin/bash vscode \
     && printf 'vscode ALL=(ALL) NOPASSWD:ALL\n' > /etc/sudoers.d/vscode \
     && chmod 0440 /etc/sudoers.d/vscode
+
+COPY --from=locale-data /usr/lib/locale/locale-archive /usr/lib/locale/locale-archive
 
 # Preserve the installation prefix for findlib/utop, without OPAM, its
 # repository, source archives, build directories or compiler duplication.

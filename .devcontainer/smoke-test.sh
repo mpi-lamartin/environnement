@@ -14,6 +14,16 @@ test -w "$HOME"
 tmp_dir=$(mktemp -d)
 trap 'rm -rf "$tmp_dir"' EXIT
 cd "$tmp_dir"
+# Reproduce the locale inherited by Codespaces terminals. Bash can exit zero
+# despite setlocale warnings, so also require empty stderr.
+locale -a | grep -Fx 'en_US.utf8'
+env -u LC_ALL LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8 LC_COLLATE=en_US.UTF-8 \
+    bash --noprofile --norc -c 'locale charmap' > locale.out 2> locale.err
+test "$(cat locale.out)" = UTF-8
+if test -s locale.err; then
+    cat locale.err >&2
+    exit 1
+fi
 printf '#include <stdio.h>\nint main(void) { puts("C OK"); return 0; }\n' > test.c
 printf 'all:\n\tgcc -g -Wall -Wextra -fsanitize=address,undefined test.c -o test-c\n' > Makefile
 make
