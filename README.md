@@ -5,6 +5,7 @@ Contient :
 - `gcc` comme compilateur C (exemple : gcc test.c puis ./a.out)
 - `ocaml` pour exécuter un fichier OCaml (exemple : ocaml test.ml)
 - `ocamlopt` pour compiler un fichier OCaml (exemple : ocamlopt test.ml puis ./a.out)
+- 'sqlite3' pour gérer des bases de données SQLite.
 
 Le Makefile est celui donné au TP d'informatique à CCINP et permet de simplifier les commandes.  
 Par exemple, `make main` est un raccourci pour `gcc -o main.exe -Wall *.c -lm` : il compile tous les fichiers C et produit un exécutable `main.exe`.
