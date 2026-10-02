@@ -25,7 +25,7 @@ Par exemple, `make main` est un raccourci pour `gcc -o main.exe -Wall *.c -lm` :
 
 ## Image Docker
 
-L'image Docker est `ghcr.io/mpi-lamartin/environnement:latest`, elle utilise Debian 13 (`trixie-slim`) et un utilisateur `vscode` avec sudo.
+L'image Docker est [`ghcr.io/mpi-lamartin/environnement:latest`](https://github.com/mpi-lamartin/environnement/pkgs/container/environnement), elle utilise Debian 13 (`trixie-slim`) et un utilisateur `vscode` avec sudo.
 
 ```sh
 docker build -t mpi-environnement:test .devcontainer
