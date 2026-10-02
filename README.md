@@ -26,9 +26,6 @@ Par exemple, `make main` est un raccourci pour `gcc -o main.exe -Wall *.c -lm` :
 ## Image Docker
 
 L'image Docker est `ghcr.io/mpi-lamartin/environnement:latest`, elle utilise Debian 13 (`trixie-slim`) et un utilisateur `vscode` avec sudo.
-Elle contient `gcc` (avec les sanitizers), `gdb`, `make`, `sqlite3`, OCaml 5.3
-(`ocaml`, `ocamlc`, `ocamlopt`), utop 2.16.0, ocamlformat 0.27.0
-(avec `ocamlformat-rpc`) et ocaml-lsp-server 1.23.1 (`ocamllsp`).
 
 ```sh
 docker build -t mpi-environnement:test .devcontainer
