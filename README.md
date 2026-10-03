@@ -17,11 +17,12 @@ Par exemple, `make main` est un raccourci pour `gcc -o main.exe -Wall *.c -lm` :
 
 ## Utilisation du Codespace
 
-- S'incrire sur [GitHub](https://github.com) (Sign Up).
-- Si vous n'avez pas encore de codespace : aller sur https://github.com/mpi-lamartin/environnement et cliquer sur le bouton Code puis "Create codespace on main".
-- Sinon, retrouver votre codespace en cliquant sur le menu en haut à gauche puis "Codespaces".
-- Dans les options du Codespace, déselectionner "Auto-delete codespace" pour éviter qu'il ne soit supprimé après 2 semaines d'inutilisation.
-- Par défaut, GitHub donne 120h/mois d'utilisation gratuite (180h/mois pour les étudiants).
+1. S'incrire sur [GitHub](https://github.com) (Sign Up).
+2. Si vous n'avez pas encore de codespace : aller sur https://github.com/mpi-lamartin/environnement et cliquer sur le bouton Code puis "Create codespace on main".
+   Sinon, retrouver votre codespace en cliquant sur le menu en haut à gauche puis "Codespaces".
+3. Dans les options du Codespace, déselectionner "Auto-delete codespace" pour éviter qu'il ne soit supprimé après 2 semaines d'inutilisation.
+
+Par défaut, GitHub donne 120h/mois d'utilisation gratuite (180h/mois pour les étudiants).
 
 ## Utilisation en local
 
