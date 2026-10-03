@@ -15,6 +15,12 @@ Par exemple, `make main` est un raccourci pour `gcc -o main.exe -Wall *.c -lm` :
 > Il est possible d'activer davantage d'avertissements et un outil d'analyse de la gestion de la mémoire avec la ligne de compilation gcc -o main.exe -g -Wall -Wextra -fsanitize=address *.c -lm ou en écrivant make safe. L’examinateur pourra vous demander de compiler avec ces options.
 > Si vous désirez forcer la compilation de tous les fichiers, vous pouvez au préalable nettoyer le répertoire en faisant make clean et relancer une compilation.
 
+## Utilisation en local
+
+1. Installez [Docker Desktop](https://www.docker.com/products/docker-desktop/) et [Visual Studio Code](https://code.visualstudio.com/).
+2. Clonez ce dépôt, puis installez l’extension [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
+3. Ouvrez le dossier dans VS Code et lancez la commande `Dev Containers: Reopen in Container` ; l’environnement est alors prêt à l’emploi.
+
 ## Utilisation du Codespace
 
 - S'incrire sur [GitHub](https://github.com) (Sign Up).
