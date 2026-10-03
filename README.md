@@ -1,4 +1,4 @@
-# Environnement de développement pour les TP de MPI
+# Environnement de développement pour les TP de MPI avec Visual Studio Code
 
 Contient :
 - `utop` comme interpréteur interactif OCaml
@@ -15,7 +15,7 @@ Par exemple, `make main` est un raccourci pour `gcc -o main.exe -Wall *.c -lm` :
 > Il est possible d'activer davantage d'avertissements et un outil d'analyse de la gestion de la mémoire avec la ligne de compilation gcc -o main.exe -g -Wall -Wextra -fsanitize=address *.c -lm ou en écrivant make safe. L’examinateur pourra vous demander de compiler avec ces options.
 > Si vous désirez forcer la compilation de tous les fichiers, vous pouvez au préalable nettoyer le répertoire en faisant make clean et relancer une compilation.
 
-## Utilisation du Codespace
+## Utilisation du Codespace par navigateur
 
 1. S'incrire sur [GitHub](https://github.com) (Sign Up).
 2. Si vous n'avez pas encore de Codespace : aller sur https://github.com/mpi-lamartin/environnement et cliquer sur le bouton Code puis "Create Codespace on main".
